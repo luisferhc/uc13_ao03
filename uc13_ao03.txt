@@ -1,0 +1,86 @@
+CREATE DATABASE JogoRPG
+USE JogoRPG
+
+CREATE TABLE Usuarios
+(
+	Id INT PRIMARY KEY IDENTITY
+	,Email VARCHAR(120) NOT NULL UNIQUE
+	,Senha VARCHAR(120) NOT NULL UNIQUE
+	,Apelido VARCHAR(120) NOT NULL UNIQUE
+)
+
+CREATE TABLE Classes
+(
+	Id INT PRIMARY KEY IDENTITY
+	,Nome VARCHAR(120) NOT NULL
+	,Descricao VARCHAR(120) NOT NULL
+)
+
+CREATE TABLE Habilidades
+(
+	Id INT PRIMARY KEY IDENTITY
+	,Nome VARCHAR(120) NOT NULL
+	,Descricao VARCHAR(120) NOT NULL
+)
+
+CREATE TABLE Personagens
+(
+	Id INT PRIMARY KEY IDENTITY
+	,Nome VARCHAR(120) NOT NULL
+	,Descricao VARCHAR(120) NOT NULL
+	,IdUsuarios INT FOREIGN KEY REFERENCES Usuarios(Id)
+	,IdClasses INT FOREIGN KEY REFERENCES Classes(Id)
+)
+
+CREATE TABLE ClassesHabilidades
+(
+	IdClasses INT FOREIGN KEY REFERENCES Classes(Id)
+	,IdHabilidades INT FOREIGN KEY REFERENCES Habilidades(Id)
+)
+
+INSERT INTO Usuarios (Email, Senha, Apelido)
+VALUES ('aphonso@email.com', 'balacobaco', 'Aphonso')
+
+INSERT INTO Usuarios (Email, Senha, Apelido)
+VALUES ('danox@email.com', 'melaleuca', 'danox')
+
+INSERT INTO Personagens (Nome, Descricao)
+VALUES ('DeuBug', 'Bárbaro babão')
+
+INSERT INTO Personagens (Nome, Descricao)
+VALUES ('BitBug', 'Monge molenga')
+
+INSERT INTO Habilidades (Nome, Descricao)
+VALUES ('Lança mortal', 'Lança que solta gelo')
+
+INSERT INTO Habilidades (Nome, Descricao)
+VALUES ('Escudo supremo', 'Escudo anti gelo')
+
+INSERT INTO Habilidades (Nome, Descricao)
+VALUES ('Recuperar vida', 'Cachaça anti gelo')
+
+INSERT INTO Classes (Nome, Descricao)
+VALUES ('Bárbaro', 'Vikings salteadores')
+
+INSERT INTO Habilidades (Nome, Descricao)
+VALUES ('Monge', 'Místicos medievais')
+
+SELECT Nome FROM Habilidades
+
+SELECT * FROM Personagens
+
+SELECT Descricao
+FROM Habilidades
+WHERE Id = 1
+
+UPDATE Habilidades SET Descricao = 'Lança que solta sorvete' WHERE Id = 1
+
+SELECT Descricao
+FROM Habilidades
+WHERE Id = 1
+
+DELETE FROM Habilidades WHERE Id = 1
+
+SELECT Descricao
+FROM Habilidades
+WHERE Id = 1
